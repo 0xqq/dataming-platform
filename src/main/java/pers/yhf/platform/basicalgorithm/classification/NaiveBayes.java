@@ -34,7 +34,6 @@ public class NaiveBayes {
 	
 	public static void predict(String path,String testPath) throws IOException{
 		String[][] testSet = ReadOperation.read_csvFile2(testPath);
-		String[][] trainSet =  ReadOperation.read_csvFile2(path);
 		int row = testSet.length;
 		int col = testSet[0].length;
 		String predictPro = null;
@@ -60,10 +59,7 @@ public class NaiveBayes {
 	 * @throws IOException 
 	 */
 	    public static String predictEachTestSample(String path,String[] testArr) throws IOException{
-	    	String[][] dataSet =  ReadOperation.read_csvFile2(path); 
-		    int row = dataSet.length;
-		    int col = dataSet[0].length;
-		    String[] labels = AlgorithmOperation.getLabels2(path); 
+	    	String[] labels = AlgorithmOperation.getLabels2(path); 
 		    Map<String,Double> map = new HashMap<String,Double>();
 		    Set<String> labelSet = new HashSet<String>(); 
 	    	 for(String lab:labels){
@@ -211,15 +207,14 @@ public class NaiveBayes {
 		   String[][] dataSet =  ReadOperation.read_csvFile2(path); 
 		    //标签label出现的次数
 		   int labelNum = getNumFromLabel(path,label);  
-		   int row = dataSet.length;  
-	       String[] traitArr = AlgorithmOperation.getColArray(dataSet, index);
+		   String[] traitArr = AlgorithmOperation.getColArray(dataSet, index);
 	       Set<String> traitSet = new HashSet<String>();
 	       for(String trait:traitArr){
 	    	   traitSet.add(trait);
 	       }
 	       //获取第index列的特征值的可能取值数量
 	       int traitValueNum = traitSet.size();
-	       double label_probability = (labelNum+1)/(double)(row+traitValueNum);
+	        //double label_probability = (labelNum+1)/(double)(row+traitValueNum);
 	        //System.out.println("laplace: "+label_probability); 
 	       double result = (num+1)/(double)(labelNum+traitValueNum);
 	       return result;
@@ -229,12 +224,12 @@ public class NaiveBayes {
 //----------------------------------------------------------------------------------------//
 	   
 	   /**
-	     * 将String类型标签转化为Integer值   其中   B:0     R:1      L:2
+	     * 将String类型标签转化为Integer值 
 	     * @param path
 	     * @param label
 	     * @throws IOException 
 	     */
-	    public static void transferToNumFromLabel(String path) throws IOException{
+	    /*public static void transferToNumFromLabel(String path) throws IOException{
 	    	String[][] dataSet =  ReadOperation.read_csvFile2(path);
 	    	int row = dataSet.length;
 	    	  System.out.println("row="+row); 
@@ -243,7 +238,7 @@ public class NaiveBayes {
 	    	for(int i=0;i<row;i++){
 	    		for(int j=0;j<col-1;j++){
 	    			arr[i][j] = Double.valueOf(dataSet[i][j]);
-	    			/*
+	    			
 	    			 * if("B".equals(dataSet[i][col-1])){
 	    				arr[i][col-1]= 0;
 	    			}
@@ -253,10 +248,10 @@ public class NaiveBayes {
 	    			else if("L".equals(dataSet[i][col-1])){
 	    				arr[i][col-1]= 2;
 	    			}
-	    			*/
+	    			
 	    		}
 	    	}
-	    }
+	    }*/
 	    
 	    
 
