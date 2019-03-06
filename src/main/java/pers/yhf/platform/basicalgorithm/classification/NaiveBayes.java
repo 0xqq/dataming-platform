@@ -1,15 +1,14 @@
 package pers.yhf.platform.basicalgorithm.classification;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import pers.yhf.platform.utils.AlgorithmOperation;
 import pers.yhf.platform.utils.ReadOperation;
-import pers.yhf.platform.utils.ShowOperations;
 
 /**
  * 朴素贝叶斯算法
@@ -20,19 +19,9 @@ public class NaiveBayes {
 
 	public static void main(String[] args) throws IOException {  
 
-		String path= "C:\\Users\\Yin\\Desktop\\balance-scale2.csv";
-		//System.out.println(getProbabilityFromLabel(path,"B"));
-		//String[] str = getAllLabels(path);
-		//ShowOperations.printArr(str); 
-		 
-		//double[][] trainSet = AlgorithmOperation.getDatas(path);
-		 //getProbabilityOnlabel(path,"R"); 
+		String path= "C:\\Users\\Yin_22\\Desktop\\balance-scale2.csv";
 		
-		//标签转化为数值
-		//transferToNumFromLabel(path);
-		
-		String path2= "C:\\Users\\Yin\\Desktop\\balance-scale3.csv"; 
-		//String[][] trainSet2 = ReadOperation.read_csvFile2(path2);
+		String path2= "C:\\Users\\Yin_22\\Desktop\\balance-scale3.csv";  
 		 
 		predict(path,path2);
 		
@@ -79,9 +68,15 @@ public class NaiveBayes {
 		    Set<String> labelSet = new HashSet<String>(); 
 	    	 for(String lab:labels){
 	    		 labelSet.add(lab);
-	    	 }
+	    	 }  
+	    	 double pro = 0.0;
+	    	 System.out.println(labelSet); 
 	    	 for(String lab:labelSet){ 
-	    		 map.put(lab, getProbabilityOnlabel(path,lab,testArr));
+	    		 pro = Double.valueOf(new DecimalFormat("#.0000000").format(getProbabilityFromLabel(path,lab)));
+	    		 pro *= Double.valueOf(new DecimalFormat("#.0000000").format(getProbabilityOnlabel(path,lab,testArr)));
+	    		 
+	    		 map.put(lab, Double.valueOf(new DecimalFormat("#.0000000").format(pro)));
+	    		 pro = 0.0;
 	    	 }
 	    	 System.out.println(map); 
 		    
@@ -248,7 +243,8 @@ public class NaiveBayes {
 	    	for(int i=0;i<row;i++){
 	    		for(int j=0;j<col-1;j++){
 	    			arr[i][j] = Double.valueOf(dataSet[i][j]);
-	    			if("B".equals(dataSet[i][col-1])){
+	    			/*
+	    			 * if("B".equals(dataSet[i][col-1])){
 	    				arr[i][col-1]= 0;
 	    			}
 	    			else if("R".equals(dataSet[i][col-1])){
@@ -257,6 +253,7 @@ public class NaiveBayes {
 	    			else if("L".equals(dataSet[i][col-1])){
 	    				arr[i][col-1]= 2;
 	    			}
+	    			*/
 	    		}
 	    	}
 	    }

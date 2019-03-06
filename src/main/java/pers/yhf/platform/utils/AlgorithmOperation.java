@@ -14,9 +14,12 @@ public class AlgorithmOperation {
 
 	public static void main(String[] args) {
 
-       
+        
 
 	}
+	
+	
+	
 	
 	
 	/**
@@ -106,14 +109,17 @@ public class AlgorithmOperation {
 		for(int i=0;i<len;i++){
 			value[i]=map.get(arr[i]);
 		}
-		int temp=0; 
-		for(int i=1;i<len;i++){
-			if(value[i]<value[i-1]){
-				temp = i-1;
-			}
-			else temp = i;
-		}
-		return arr[temp];
+		 
+		double max = value[0];
+	       int maxIndex=0;
+	       for(int i=0;i<len;i++){
+	    	   if(max<value[i]){
+	    		   max=value[i];
+	    		   maxIndex=i;
+	    	   }
+	       }
+		 //System.out.println("最大为:"+max); 
+		return arr[maxIndex];
 	}
 
 }
