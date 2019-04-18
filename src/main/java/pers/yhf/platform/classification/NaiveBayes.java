@@ -1,4 +1,4 @@
-package pers.yhf.platform.basicalgorithm.classification;
+package pers.yhf.platform.classification;
 
 import java.io.IOException;
 import java.util.HashMap;
